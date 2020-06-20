@@ -1,5 +1,4 @@
 /* jshint node: true, mocha: true */
-
 'use strict';
 
 if (process.browser) {
@@ -173,6 +172,62 @@ suite('specs', function () {
                 }
               ]
             }
+          ]
+        });
+        done();
+      });
+    });
+
+    test('circular types file', function (done) {
+      var fpath = path.join(DPATH, 'Circular.avdl');
+      assembleProtocol(fpath, function (err, schema) {
+        assert.strictEqual(err, null);
+        assert.deepEqual(schema, {
+          protocol: 'circular.Circular',
+          types: [
+            {type: 'fixed', size: 1, name: 'First'},
+            {
+              type: 'record',
+              name: 'Node',
+              fields: [
+                {name: 'count', type: 'int', 'default': 0},
+                {
+                  name: 'samples',
+                  type: {
+                    type: 'array',
+                    items: {
+                      type: 'record',
+                      name: 'Pair',
+                      fields: [
+                        {name: 'name', type: 'string'},
+                        {name: 'node', type: 'Node'}
+                      ]
+                    }
+                  },
+                  'default': []
+                }
+              ]
+            },
+            {
+              type: 'error',
+              name: 'here.SingleError',
+              fields: [
+                {
+                  name: 'cause',
+                  type: {
+                    type: 'error',
+                    name: 'here.MultiError',
+                    fields: [
+                      {
+                        name: 'errors',
+                        type: {type: 'map', values: 'here.SingleError'}
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {type: 'enum', name: 'Last', symbols: ['ONE', 'TWO']},
           ]
         });
         done();

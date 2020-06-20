@@ -1,0 +1,24 @@
+// A protocol with circular references
+protocol circular.Circular {
+
+  fixed First(1);
+
+  // https://github.com/mtth/avsc/issues/308
+  record Node {
+    int count = 0;
+    array<Pair> samples = [];
+  }
+  record Pair {
+    string name;
+    Node node;
+  }
+
+  error here.SingleError {
+    MultiError cause;
+  }
+  error here.MultiError {
+    map<here.SingleError> errors;
+  }
+
+  enum Last { ONE, TWO }
+}
