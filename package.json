@@ -1,6 +1,6 @@
 {
   "name": "@via-org/avsc",
-  "version": "6.1.4",
+  "version": "6.1.5",
   "type": "module",
   "exports": {
     "import": "./lib/index.mjs",
