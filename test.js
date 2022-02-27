@@ -2,7 +2,7 @@ import test from 'ava'
 
 import { createSchema } from './src/index.js'
 
-const tagParser = createSchema({
+const Tag = createSchema({
   type: 'record',
   name: 'Tag',
   fields: [
@@ -12,48 +12,48 @@ const tagParser = createSchema({
 })
 
 test.before(t => {
-  t.context.tagsParser = createSchema({
+  t.context.Tags = createSchema({
     type: 'array',
-    items: tagParser,
+    items: Tag,
   })
-  t.context.tags = [
+  t.context.sampleTags = [
     { name: 'App-Name', value: 'BUIDL' },
     { name: 'App-Version', value: '0.0.0' },
   ]
 })
 
-test('A parsed schema should encode an object to a Uint8Array', t => {
-  const { tagsParser, tags } = t.context
+test('Once created, a schema should encode an object to a Uint8Array', t => {
+  const { Tags, sampleTags } = t.context
 
-  const encoded = tagsParser.toBuffer(tags)
+  const encoded = Tags.toBuffer(sampleTags)
 
   t.true(encoded instanceof Uint8Array)
 })
 
-test('A parsed schema should decode a buffer to an object', t => {
-  const { tagsParser, tags } = t.context
+test('Once created, a schema should decode a buffer to an object', t => {
+  const { Tags, sampleTags } = t.context
 
-  const encoded = tagsParser.toBuffer(tags)
-  const decoded = tagsParser.fromBuffer(encoded)
+  const encoded = Tags.toBuffer(sampleTags)
+  const decoded = Tags.fromBuffer(encoded)
 
   t.true(decoded instanceof Object)
 })
 
-test('A parsed schema should decode an encoded object back to the same value', t => {
-  const { tagsParser, tags } = t.context
+test('Once created, a schema should decode an encoded object back to the same value', t => {
+  const { Tags, sampleTags } = t.context
 
-  const encoded = tagsParser.toBuffer(tags)
-  const decoded = tagsParser.fromBuffer(encoded)
+  const encoded = Tags.toBuffer(sampleTags)
+  const decoded = Tags.fromBuffer(encoded)
 
   t.true(
-    tags.every(
+    sampleTags.every(
       ({ name, value }, i) =>
         name === decoded[i].name && value === decoded[i].value
     )
   )
 })
 
-test('A parse schema should detect when an invalid object is supplied', t => {
+test('Once created, a schema should detect when an invalid object is supplied', t => {
   const { tagsParser } = t.context
 
   const invalidTags = [{ name: 'Invalid', value: true }]
