@@ -17,7 +17,6 @@ $ yarn add @via-org/avsc
 ## Example
 
 ```js
-// Initialize a schema:
 import { createSchema } from '@via-org/avsc'
 
 const tagParser = createSchema({
