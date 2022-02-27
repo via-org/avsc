@@ -1,69 +1,41 @@
 {
-  "name": "avsc",
+  "name": "@hbauer/avsc",
   "version": "5.7.3",
-  "description": "Avro for JavaScript",
-  "homepage": "https://github.com/mtth/avsc",
-  "keywords": [
-    "api",
-    "avdl",
-    "avpr",
-    "avro",
-    "avsc",
-    "binary",
-    "buffer",
-    "data",
-    "decoding",
-    "encoding",
-    "idl",
-    "interface",
-    "ipc",
-    "json",
-    "marshalling",
-    "message",
-    "protocol",
-    "rpc",
-    "schema",
-    "serde",
-    "serialization",
-    "type"
-  ],
+  "type": "module",
+  "exports": {
+    "import": "./lib/index.mjs",
+    "require": "./lib/index.cjs",
+    "browser": "./lib/index.js"
+  },
+  "module": "./lib/index.mjs",
+  "main": "./lib/index.cjs",
+  "types": "types/index.d.ts",
   "files": [
-    "etc/browser",
     "lib",
     "types"
   ],
-  "main": "./lib",
-  "types": "./types",
-  "browser": {
-    "./lib": "./etc/browser/avsc.js",
-    "./lib/files": "./etc/browser/lib/files.js",
-    "crypto": "./etc/browser/lib/crypto.js"
-  },
-  "engines": {
-    "node": ">=0.11"
+  "repository": "https://github.com/handlebauer/avsc.git",
+  "licence": "MIT",
+  "prettier": "@hbauer/prettier-config",
+  "eslintConfig": {
+    "extends": "@hbauer/eslint-config"
   },
   "scripts": {
-    "clean": "rm -rf coverage dist node_modules",
-    "cover": "nyc mocha -- --ui tdd",
-    "coverAndPublish": "nyc npm test && nyc report --reporter=text-lcov | coveralls",
-    "dist": "./etc/scripts/dist",
-    "perf": "./etc/scripts/perf etc/schemas/*",
-    "test": "mocha --ui tdd --reporter dot"
+    "build": "shx rm -rf ./lib && rollup -c && tsc -p jsconfig.json",
+    "test": "ava",
+    "prepublishOnly": "npm run build",
+    "prepare": "husky install"
   },
   "devDependencies": {
-    "benchmark": "~2.1.4",
-    "coveralls": "^3.0.9",
-    "mocha": "^8.1.1",
-    "nyc": "~15.0.0",
-    "tmp": "^0.1.0"
-  },
-  "author": {
-    "name": "Matthieu Monsch",
-    "email": "mtth@apache.org"
-  },
-  "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/mtth/avsc.git"
+    "@hbauer/eslint-config": "^1.4.1",
+    "@hbauer/prettier-config": "^1.1.0",
+    "ava": "^4.0.1",
+    "eslint": "^8.10.0",
+    "eslint-plugin-import": "^2.25.4",
+    "husky": "^7.0.4",
+    "prettier": "^2.5.1",
+    "rollup": "^2.68.0",
+    "shx": "^0.3.4",
+    "typescript": "^4.5.5"
   }
 }
