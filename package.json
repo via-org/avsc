@@ -1,5 +1,5 @@
 {
-  "name": "@hbauer/avsc",
+  "name": "@via-org/avsc",
   "version": "6.1.1",
   "type": "module",
   "exports": {

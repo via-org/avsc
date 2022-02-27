@@ -1,6 +1,6 @@
 # avsc
 
-A stripped-down Avro implementation. Used for [bundling data](https://github.com/joshbenaron/arweave-standards/blob/ans104/ans/ANS-104.md).
+A via-specific pure JavaScript implementation of the [Avro specification](https://avro.apache.org/docs/current/spec.html). Used for [bundling data](https://github.com/joshbenaron/arweave-standards/blob/ans104/ans/ANS-104.md).
 
 ## Features
 
@@ -9,16 +9,16 @@ A stripped-down Avro implementation. Used for [bundling data](https://github.com
 ## Installation
 
 ```bash
-$ npm install @hbauer/avsc
+$ npm install @via-org/avsc
 # or
-$ yarn add @hbauer/avsc
+$ yarn add @via-org/avsc
 ```
 
 ## Example
 
 ```js
 // Initialize a schema:
-import { createSchema } from '@hbauer/avro'
+import { createSchema } from '@via-org/avro'
 
 const tagParser = createSchema({
   type: 'record',
