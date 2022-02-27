@@ -79,7 +79,7 @@ class Tap {
 
   /** @param {string} s */
   writeString(s) {
-    const len = Buffer.byteLength(s)
+    const len = new TextEncoder().encode(s).byteLength
     const buf = this.buf
     this.writeLong(len)
     let pos = this.pos
