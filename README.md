@@ -39,5 +39,5 @@ const tags = [{ name: 'Tag-Name', value: 'Tag-Value' }]
 const encodedTags = tagsParser.toBuffer(tags) // encodedTags instanceof Uint8Array
 
 // Decode
-const decodedTags = tagsParser.fromBuffer(Uint8ArrayBuffer) // decodedTags === tags
+const decodedTags = tagsParser.fromBuffer(encodedTags) // decodedTags === tags
 ```
