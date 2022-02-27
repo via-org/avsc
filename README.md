@@ -1,6 +1,6 @@
 # avsc
 
-An stripped-down Avro implementation. Used for [bundling data](https://github.com/joshbenaron/arweave-standards/blob/ans104/ans/ANS-104.md).
+A stripped-down Avro implementation. Used for [bundling data](https://github.com/joshbenaron/arweave-standards/blob/ans104/ans/ANS-104.md).
 
 ## Features
 
