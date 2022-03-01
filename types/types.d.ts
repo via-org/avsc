@@ -1,1 +1,1 @@
-export function createSchema(schema: any, opts?: {}): any
+export function createType(schema: any, opts?: {}): any
