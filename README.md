@@ -17,26 +17,24 @@ $ yarn add @via-org/avsc
 ## Example
 
 ```js
-import { createSchema } from '@via-org/avsc'
+import { createType } from '@via-org/avsc'
 
-const tagParser = createSchema({
-  type: 'record',
-  name: 'Tag',
-  fields: [
-    { name: 'name', type: 'string' },
-    { name: 'value', type: 'string' },
-  ],
-})
-
-export const tagsParser = createSchema({
+export const Tags = createType({
   type: 'array',
-  items: tagParser,
+  items: createType({
+    type: 'record',
+    name: 'Tag',
+    fields: [
+      { name: 'name', type: 'string' },
+      { name: 'value', type: 'string' },
+    ],
+  }),
 })
 
 // Encode
 const tags = [{ name: 'Tag-Name', value: 'Tag-Value' }]
-const encodedTags = tagsParser.toBuffer(tags) // encodedTags instanceof Uint8Array
+const encodedTags = Tags.toBuffer(tags) // encodedTags instanceof Uint8Array
 
 // Decode
-const decodedTags = tagsParser.fromBuffer(encodedTags) // decodedTags === tags
+const decodedTags = Tags.fromBuffer(encodedTags) // decodedTags === tags
 ```

@@ -1,1 +1,1 @@
-export { createSchema } from './types.js'
+export { createType } from './types.js'

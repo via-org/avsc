@@ -1,20 +1,18 @@
 import test from 'ava'
 
-import { createSchema } from './src/index.js'
-
-const Tag = createSchema({
-  type: 'record',
-  name: 'Tag',
-  fields: [
-    { name: 'name', type: 'string' },
-    { name: 'value', type: 'string' },
-  ],
-})
+import { createType } from './src/index.js'
 
 test.before(t => {
-  t.context.Tags = createSchema({
+  t.context.Tags = createType({
     type: 'array',
-    items: Tag,
+    items: createType({
+      type: 'record',
+      name: 'Tag',
+      fields: [
+        { name: 'name', type: 'string' },
+        { name: 'value', type: 'string' },
+      ],
+    }),
   })
   t.context.sampleTags = [
     { name: 'App-Name', value: 'BUIDL' },

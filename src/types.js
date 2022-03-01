@@ -297,4 +297,4 @@ const TYPES = {
   string: StringType,
 }
 
-export const createSchema = Type.forSchema
+export const createType = Type.forSchema
